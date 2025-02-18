@@ -36,6 +36,7 @@ def initial_points(which_player):
 
     return total, double
 
+
 #  main starts..
 
 # Roll the dice know if they qualify for double points
@@ -44,13 +45,69 @@ initial_comp = initial_points("Comp")
 
 # Retrieve user points (first item return from function)
 user_points = initial_user[0]
-# comp_points = initial_comp[0]
+comp_points = initial_user[0]
 
 double_user = initial_user[1]
 
 # let the user know if they qualify for the double points
 if double_user == "yes":
     print("Great news - if you win, you wil earn double points!")
+
+# assume user goes first...
+first = "User"
+second = "computer"
+player_1_points = user_points
+player_2_points = comp_points
+
+# if user has fewer points, they start the game
+if user_points < comp_points:
+    print('You start because your initial roll was less then the computer\n')
+
+# if the user and computer roll equal points, the user is player 1...
+elif user_points == comp_points:
+    print('the initial rolls were the same, the user starts!')
+
+# if the computer has fewer points, switch the computer to "player 1"
+else:
+    player_1_points, player_2_points = player_2_points, player_1_points
+    first, second = second, first
+    player_1_points, player_2_points =player_2_points, player_1_points
+    first, second = second, first
+
+
+while player_1_points < 13 and player_2_points < 13:
+    print()
+    input("Press <enter> to continue this round\n")
+
+    # first person rolls the die and score is updated
+    player_1_points = random.randint(1, 6)
+    print()
+    input("Press <enter> to continue this round\n")
+
+    # first person rolls the die and score is updated
+    player_1_roll = random.randint(1. 6)
+    player_2_points += player_1_roll
+
+    print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
+
+
+
+    #if the first person's score is over 13, end the round
+    if player_1_points >= 13:
+        break
+
+    # second person rolls the die (and score is updated)
+    player_2_roll = random.randint(1. 6)
+    player_1_points += player_2_roll
+
+    print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
+
+    print(f"{first}: {player_1_points} | {second} {player_2_points}")
+
+print("end of round")
+
+
+
 
 print()
 # main routine starts here
